@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    const form                = document.getElementById('wf-form-invoice-payment');
+  console.log('🔄 pay-invoice script LIVE, build 2025-04-30-a');
+   
+  const form                = document.getElementById('wf-form-invoice-payment');
     const entityNameInput     = document.getElementById('entity-name');
     const emailInput          = document.getElementById('email-address-invoice');
     const invoiceInput        = document.getElementById('invoice-number');
