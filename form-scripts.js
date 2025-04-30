@@ -48,12 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const needsFile = [...radioButtons].some((rb) => rb.checked && rb.value === 'yes');
       
       if (needsFile) {
-        fileUploadWrapper?.classList.remove('w-hidden');
-        fileUploadWrapper?.style.display = 'block';
+        if (fileUploadWrapper) {
+          fileUploadWrapper.classList.remove('w-hidden');
+          fileUploadWrapper.style.display = 'block';
+        }
         fileInput.required = true;
       } else {
-        fileUploadWrapper?.classList.add('w-hidden');
-        fileUploadWrapper?.style.display = 'none';
+        if (fileUploadWrapper) {
+          fileUploadWrapper.classList.add('w-hidden');
+          fileUploadWrapper.style.display = 'none';
+        }
         fileInput.required = false;
         fileInput.value = '';          // clear stray file
       }
