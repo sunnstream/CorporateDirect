@@ -3,14 +3,13 @@ name: Purge jsDelivr cache
 
 on:
   push:
-    branches: [main]         # only purge when main is updated
+    branches: [main]
 
 jobs:
   purge:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Purge form-scripts.js from jsDelivr
-        run: |
-          curl -s "https://purge.jsdelivr.net/gh/sunnstream/CorporateDirect@main/form-scripts.js"
-          echo "jsDelivr purge request sent 👍"
+      - name: Purge file
+        run: curl -s "https://purge.jsdelivr.net/gh/sunnstream/CorporateDirect@main/form-scripts.js"
+      - name: Purge branch pointer
+        run: curl -s "https://purge.jsdelivr.net/gh/sunnstream/CorporateDirect"
