@@ -41,6 +41,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fileErrorTxt) fileErrorTxt.textContent = '';
       }
     }
+
+    function toggleFileUpload() {
+      hideFileError();
+      const needsFile = [...radioButtons].some((rb) => rb.checked && rb.value === 'yes');
+      
+      if (needsFile) {
+        fileUploadWrapper?.classList.remove('w-hidden');
+        fileUploadWrapper?.style.display = 'block';
+        fileInput.required = true;
+      } else {
+        fileUploadWrapper?.classList.add('w-hidden');
+        fileUploadWrapper?.style.display = 'none';
+        fileInput.required = false;
+        fileInput.value = '';          // clear stray file
+      }
+    }
+    
+    radioButtons.forEach((rb) => rb.addEventListener('change', toggleFileUpload));
+    toggleFileUpload();              
   
     document
       .querySelectorAll('[data-char-limit]')
@@ -50,25 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (el.value.length > limit) el.value = el.value.slice(0, limit);
         });
       });
-  
-  
-    function toggleFileUpload() {
-      hideFileError();
-      const needsFile = [...radioButtons].some((rb) => rb.checked && rb.value === 'yes');
-      if (needsFile) {
-        fileUploadWrapper?.classList.remove('w-hidden');
-        fileUploadWrapper?.style.display = 'block';
-        fileInput.required = true;
-      } else {
-        fileUploadWrapper?.classList.add('w-hidden');
-        fileUploadWrapper?.style.display = 'none';
-        fileInput.required = false;
-        fileInput.value = '';           
-      }
-    }
-    radioButtons.forEach((rb) => rb.addEventListener('change', toggleFileUpload));
-    toggleFileUpload();                
-  
   
     fileInput.addEventListener('change', () => {
       hideFileError();
@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
       }
     });
-  
   
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
